@@ -102,10 +102,9 @@ def create_metadata_window(metadata, file_path):
         metadata_window.destroy()
 
     metadata_window.protocol("WM_DELETE_WINDOW", on_close)
-
+    
 def on_exit():
     root.quit()
-
 def adjust_textbox_height(event):
     lines = int(metadata_text.index('end-1c').split('.')[0])
     metadata_text.config(height=lines)
