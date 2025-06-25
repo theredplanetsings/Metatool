@@ -69,7 +69,7 @@ No installation required, upload your files directly in the browser and analyze 
 
 6. **Export results** in your preferred format (JSON, CSV, TXT)
 
-### 🖥️ Legacy Tkinter GUI (Desktop App)
+### Legacy Tkinter GUI (Desktop App)
 
 1. **Run the desktop application:**
    ```bash
