@@ -31,7 +31,7 @@ def get_file_metadata(file_path):
         metadata['File Type'] = 'Directory' if os.path.isdir(file_path) else 'File'
         metadata['Permissions'] = stat.filemode(file_stat.st_mode)
         
-        # Handle owner/group based on platform
+        # handles owner/group based on platform
         if platform.system() != 'Windows':
             try:
                 import pwd
@@ -50,7 +50,7 @@ def get_file_metadata(file_path):
         metadata['Access Time'] = datetime.fromtimestamp(os.path.getatime(file_path)).strftime("%Y-%m-%d %H:%M:%S")
         metadata['Parent Folder'] = os.path.dirname(file_path)
         
-        # Add file extension if it's a file
+        # adds file extension if it's a file
         if not os.path.isdir(file_path):
             metadata['Extension'] = os.path.splitext(file_path)[1] or 'No extension'
         
@@ -69,7 +69,7 @@ def export_metadata_to_format(metadata_list, file_format='json'):
         if not metadata_list:
             return "", 'text/csv', 'csv'
         
-        # Create CSV with all unique keys
+        # creates CSV with all unique keys
         all_keys = set()
         for metadata in metadata_list:
             all_keys.update(metadata.keys())
@@ -107,7 +107,7 @@ def display_metadata_card(metadata, index):
         </div>
         """, unsafe_allow_html=True)
         
-        # Create two columns for better layout
+        # creates two columns for better layout
         col1, col2 = st.columns(2)
         
         with col1:
@@ -123,7 +123,7 @@ def display_metadata_card(metadata, index):
             st.write(f"• **Modified:** {metadata.get('Modification Time', 'N/A')}")
             st.write(f"• **Accessed:** {metadata.get('Access Time', 'N/A')}")
         
-        # Path information in full width
+        # the path info in full width
         st.write("**Path Information:**")
         st.write(f"• **Location:** {metadata.get('File Path', 'N/A')}")
         st.write(f"• **Parent Folder:** {metadata.get('Parent Folder', 'N/A')}")
@@ -143,11 +143,10 @@ def main():
     st.title("File Metadata Analyzer")
     st.markdown("**Upload multiple files to analyze and compare their metadata**")
     
-    # Sidebar for controls
+    # control sidebar
     with st.sidebar:
         st.header("Controls")
-        
-        # File upload
+        # file upload
         uploaded_files = st.file_uploader(
             "Choose files to analyze",
             accept_multiple_files=True,
@@ -159,7 +158,7 @@ def main():
         
         st.markdown("---")
         
-        # Export options
+        # export options
         if uploaded_files:
             st.header("Export Options")
             export_format = st.selectbox(
@@ -169,10 +168,10 @@ def main():
             )
             
             if st.button("📥 Export All Metadata"):
-                # Process all files and export
+                # processes all files and export
                 all_metadata = []
                 for uploaded_file in uploaded_files:
-                    # Save uploaded file temporarily
+                    # saves uploaded file temporarily
                     temp_path = f"temp_{uploaded_file.name}"
                     with open(temp_path, "wb") as f:
                         f.write(uploaded_file.getbuffer())
@@ -180,8 +179,7 @@ def main():
                     metadata = get_file_metadata(temp_path)
                     if metadata:
                         all_metadata.append(metadata)
-                    
-                    # Clean up temp file
+                    # cleans up temp file
                     try:
                         os.remove(temp_path)
                     except:
@@ -199,7 +197,7 @@ def main():
                         mime=mime_type
                     )
     
-    # Main content area
+    # main content area
     if not uploaded_files:
         st.info("👆 Please upload files using the sidebar to get started")
         st.markdown("""
@@ -211,17 +209,16 @@ def main():
         - 🌐 **Cross-platform**: Works on Windows, macOS, and Linux
         """)
     else:
-        # Process and display metadata for each file
+        # process and display metadata for each file
         st.header(f"Analyzing {len(uploaded_files)} file(s)")
-        
-        # Create tabs for better organization when many files
+        # creates tabs for better organization when many files
         if len(uploaded_files) > 3:
             tab_names = [f"File {i+1}" for i in range(len(uploaded_files))]
             tabs = st.tabs(tab_names)
             
             for i, (uploaded_file, tab) in enumerate(zip(uploaded_files, tabs)):
                 with tab:
-                    # Save uploaded file temporarily
+                    # saves uploaded file temporarily
                     temp_path = f"temp_{uploaded_file.name}"
                     with open(temp_path, "wb") as f:
                         f.write(uploaded_file.getbuffer())
@@ -230,7 +227,7 @@ def main():
                     if metadata:
                         display_metadata_card(metadata, i)
                         
-                        # Individual file export
+                        # indvl file export
                         col1, col2, col3 = st.columns([1, 1, 2])
                         with col1:
                             if st.button(f"Export JSON", key=f"json_{i}"):
@@ -242,16 +239,15 @@ def main():
                                     mime="application/json",
                                     key=f"download_json_{i}"
                                 )
-                    
-                    # Clean up temp file
+                    # cleans up temp file
                     try:
                         os.remove(temp_path)
                     except:
                         pass
         else:
-            # Display all files in main area for easier comparison
+            # displays all files in main area for easier comparison
             for i, uploaded_file in enumerate(uploaded_files):
-                # Save uploaded file temporarily
+                # saves uploaded file temporarily
                 temp_path = f"temp_{uploaded_file.name}"
                 with open(temp_path, "wb") as f:
                     f.write(uploaded_file.getbuffer())
@@ -260,13 +256,13 @@ def main():
                 if metadata:
                     display_metadata_card(metadata, i)
                 
-                # Clean up temp file
+                # cleans up temp file
                 try:
                     os.remove(temp_path)
                 except:
                     pass
                 
-                # Add separator between files
+                # adds separator between files
                 if i < len(uploaded_files) - 1:
                     st.markdown("---")
 
