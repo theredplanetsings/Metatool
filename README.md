@@ -6,7 +6,7 @@ A comprehensive file metadata analyzer available in both GUI (Tkinter) and web a
 
 **Try it now:** [https://metatool.streamlit.app/](https://metatool.streamlit.app/)
 
-No installation required! Upload your files directly in the browser and analyze their metadata instantly.
+No installation required, upload your files directly in the browser and analyze their metadata instantly.
 
 ## Features
 
