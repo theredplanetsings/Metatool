@@ -2,6 +2,12 @@
 
 A comprehensive file metadata analyzer available in both GUI (Tkinter) and web app (Streamlit) versions.
 
+## Live Web App
+
+**Try it now:** [https://metatool.streamlit.app/](https://metatool.streamlit.app/)
+
+No installation required! Upload your files directly in the browser and analyze their metadata instantly.
+
 ## Features
 
 ### Core Features
@@ -36,7 +42,14 @@ A comprehensive file metadata analyzer available in both GUI (Tkinter) and web a
 
 ## Installation & Usage
 
-### Streamlit Web App (Recommended)
+### Use the Live Web App (No Installation Required)
+
+1. **Visit:** [https://metatool.streamlit.app/](https://metatool.streamlit.app/)
+2. **Upload files** using the sidebar file uploader
+3. **Analyze and compare** metadata across multiple files
+4. **Export results** in your preferred format (JSON, CSV, TXT)
+
+### Run Locally - Streamlit Web App
 
 1. **Install dependencies:**
    ```bash
@@ -56,7 +69,7 @@ A comprehensive file metadata analyzer available in both GUI (Tkinter) and web a
 
 6. **Export results** in your preferred format (JSON, CSV, TXT)
 
-### Legacy Tkinter GUI
+### 🖥️ Legacy Tkinter GUI (Desktop App)
 
 1. **Run the desktop application:**
    ```bash
@@ -111,6 +124,21 @@ Metatool/
 #### Global Variables
 
 - `metadata_windows`: A dictionary to store references to open metadata windows.
+
+### Deploy Your Own Version
+
+1. **Fork this repository** on GitHub
+2. **Sign up** for [Streamlit Community Cloud](https://share.streamlit.io/)
+3. **Connect your GitHub account** and deploy directly from your fork
+4. **Choose** `streamlit_metatool.py` as your main file
+5. **Your app will be live** at `https://your-app-name.streamlit.app/`
+
+### Alternative Deployment Options
+
+- **Heroku**: Use the included `Procfile` for Heroku deployment
+- **Railway**: Connect your GitHub repo for automatic deployment
+- **Google Cloud Run**: Deploy as a containerized application
+- **AWS/Azure**: Use cloud container services
 
 ## Author
 
